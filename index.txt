@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cycle for Change | Menstrual Equity Initiative</title>
+  <style>
+    :root {
+      --primary: #b83280;
+      --primary-soft: #ffe4f1;
+      --accent: #f6ad55;
+      --bg: #fffafa;
+      --text: #1a202c;
+      --muted: #718096;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --radius-lg: 18px;
+      --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(255, 250, 250, 0.95);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #fed7e2, #b83280);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.9rem;
+      box-shadow: 0 6px 16px rgba(184, 50, 128, 0.4);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.55rem 1.3rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #b83280, #ed64a6);
+      color: white;
+      box-shadow: 0 8px 20px rgba(184, 50, 128, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(184, 50, 128, 0.5);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-soft);
+    }
+
+    main {
+      padding-bottom: 4rem;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 3.5rem 0 2.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 0.98rem;
+      max-width: 32rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-meta strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .hero-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      padding: 1.2rem 1.3rem;
+      border: 1px solid var(--border);
+    }
+
+    .hero-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+    }
+
+    .stat {
+      padding: 0.65rem 0.75rem;
+      border-radius: 0.9rem;
+      background: #fff7fb;
+      border: 1px dashed #fbb6ce;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--muted);
+      margin-bottom: 0.1rem;
+    }
+
+    .stat-value {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-note {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* Sections */
+    section {
+      padding: 2.5rem 0 0;
+    }
+
+    .section-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .section-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-description {
+      color: var(--muted);
+      font-size: 0.9rem;
+      max-width: 32rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem 1.3rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.12rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      background: var(--primary-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Impact */
+    .impact-highlight {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 2fr);
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .impact-tagline {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .impact-list {
+      list-style: none;
+      margin-top: 0.7rem;
+    }
+
+    .impact-list li {
+      padding: 0.4rem 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .impact-list li::before {
+      content: "•";
+      color: var(--primary);
+      margin-right: 0.4rem;
+    }
+
+    /* Get Involved */
+    .get-involved-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .get-involved-card ul {
+      list-style: none;
+      margin-top: 0.45rem;
+    }
+
+    .get-involved-card li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .get-involved-card li::before {
+      content: "→";
+      color: var(--primary);
+      margin-right: 0.3rem;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 2fr);
+      gap: 1.5rem;
+    }
+
+    form {
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 0.5rem;
+    }
+
+    label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      background: #fffdfd;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(184, 50, 128, 0.18);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .hint {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding: 1.5rem 0 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .footer-links a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .impact-highlight,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        padding-top: 2.5rem;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .grid-3,
+      .get-involved-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding-top: 2rem;
+      }
+
+      .hero-card {
+        margin-top: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <div class="container">
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#top" class="logo">
+          <div class="logo-icon">C</div>
+          <span>Cycle for Change</span>
+        </a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#impact">Impact</a>
+          <a href="#get-involved">Get Involved</a>
+          <a href="#contact">Contact</a>
+          <a href="#donate" class="btn btn-primary" style="padding-inline:1rem;">Donate</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-kicker">
+              Menstrual Equity • Youth-Led
+            </div>
+            <h1>
+              Centering teens in the
+              <span>cycle of change.</span>
+            </h1>
+            <p>
+              Cycle for Change is a student-led organization working to end period poverty through
+              product drives, education, and research partnerships with Children’s National Hospital.
+            </p>
+            <div class="hero-actions">
+              <a href="#get-involved" class="btn btn-primary">Join a drive</a>
+              <a href="#about" class="btn btn-outline">Learn more</a>
+            </div>
+            <div class="hero-meta">
+              <div>
+                <strong>Based in Washington, DC</strong>
+                Partnering with Children’s National Emergency Department
+              </div>
+              <div>
+                <strong>Led by students</strong>
+                Centering youth voices in health equity
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-card" aria-label="Impact summary">
+            <div class="pill">Our impact so far</div>
+            <p style="font-size:0.9rem; color:var(--muted); margin-bottom:0.5rem;">
+              Every “period pack” we assemble provides roughly one month of menstrual products for a teen in need.
+            </p>
+            <div class="hero-stat-grid">
+              <div class="stat">
+                <div class="stat-label">2024 Products</div>
+                <div class="stat-value">12,192</div>
+                <div class="stat-note">448 period packs</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">2025 Products</div>
+                <div class="stat-value">10,646</div>
+                <div class="stat-note">344 period packs</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">Emergency Dept.</div>
+                <div class="stat-value">Two&nbsp;Years</div>
+                <div class="stat-note">Serving pediatric patients</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">Focus</div>
+                <div class="stat-value">Equity</div>
+                <div class="stat-note">Access • Dignity • Education</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">About</div>
+          <h2 class="section-title">What is Cycle for Change?</h2>
+          <p class="section-description">
+            Cycle for Change is a menstrual equity initiative founded by high school students.
+            We organize menstrual product drives, assemble “period packs,” and collaborate with clinicians
+            and researchers to address period poverty among adolescents.
+          </p>
+        </div>
+
+        <div class="grid-3" aria-label="Mission pillars">
+          <div class="card">
+            <div class="pill">Access</div>
+            <h3>Period packs for patients</h3>
+            <p>
+              We collect pads, tampons, and liners and assemble them into discreet, month-long “period packs”
+              that are distributed in the Children’s National Emergency Department.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="pill">Education</div>
+            <h3>Talking openly about periods</h3>
+            <p>
+              Through school events and workshops, we normalize conversations about menstruation,
+              share evidence-based information, and highlight how period poverty affects school and health.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="pill">Advocacy & Research</div>
+            <h3>Data-driven change</h3>
+            <p>
+              We support research on period poverty and menstrual inequity in pediatric emergency settings
+              and on access to medications like naloxone and Opill in DC pharmacies.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPACT -->
+    <section id="impact">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Impact</div>
+          <h2 class="section-title">From drives to data</h2>
+          <p class="section-description">
+            Our work lives at the intersection of community action and clinical research.
+          </p>
+        </div>
+
+        <div class="impact-highlight">
+          <div class="card">
+            <p class="impact-tagline">Partnership with Children’s National Hospital</p>
+            <p style="font-size:0.9rem; color:var(--muted);">
+              Cycle for Change collaborates with the ADAPT Lab at Children’s National to better understand
+              menstrual inequity and period poverty among adolescents who seek care in the Emergency Department.
+            </p>
+            <ul class="impact-list">
+              <li>Abstracts presented at national conferences (AAP 2024, SAHM 2025).</li>
+              <li>Publication in the Journal of Pediatric and Adolescent Gynecology (in press).</li>
+              <li>Ongoing research on naloxone and Opill availability across Washington, DC pharmacies.</li>
+            </ul>
+          </div>
+
+          <div class="grid-3" style="gap:0.9rem;">
+            <div class="card">
+              <h3>Period packs assembled</h3>
+              <p><strong>792+</strong> packs across 2024–2025, each offering roughly one month of supplies.</p>
+            </div>
+            <div class="card">
+              <h3>Teens reached</h3>
+              <p>Students, patients, and families reached through drives, school events, and clinic distribution.</p>
+            </div>
+            <div class="card">
+              <h3>Student leadership</h3>
+              <p>Founded and led by high school students committed to sustainable, community-rooted change.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GET INVOLVED -->
+    <section id="get-involved">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Get Involved</div>
+          <h2 class="section-title">Ways to support Cycle for Change</h2>
+          <p class="section-description">
+            Whether you’re a student, educator, clinician, or community member, there’s a way to plug in.
+          </p>
+        </div>
+
+        <div class="get-involved-grid">
+          <div class="card get-involved-card">
+            <div class="pill">Students</div>
+            <h3>Join or start a chapter</h3>
+            <ul>
+              <li>Help plan and run menstrual product drives.</li>
+              <li>Lead peer education sessions about menstrual health.</li>
+              <li>Support research-related outreach or data collection (where appropriate).</li>
+            </ul>
+          </div>
+
+          <div class="card get-involved-card">
+            <div class="pill">Schools & Clubs</div>
+            <h3>Host a drive</h3>
+            <ul>
+              <li>Partner with us for a schoolwide product drive.</li>
+              <li>Invite a student speaker to talk about menstrual equity.</li>
+              <li>Integrate menstrual equity into service or health curricula.</li>
+            </ul>
+          </div>
+
+          <div class="card get-involved-card" id="donate">
+            <div class="pill">Community & Donors</div>
+            <h3>Support a drive</h3>
+            <ul>
+              <li>Donate pads, tampons, liners, or period underwear.</li>
+              <li>Provide gift cards or funding to purchase products.</li>
+              <li>Share our work with clinics, community orgs, or local leaders.</li>
+            </ul>
+            <p class="hint">
+              Online donation link coming soon — for now, use the contact form to coordinate donations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Contact</div>
+          <h2 class="section-title">Reach out to Cycle for Change</h2>
+          <p class="section-description">
+            Interested in hosting a drive, collaborating on education, or learning more about the research?
+            Send us a message.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card">
+            <h3>Contact form</h3>
+            <p style="font-size:0.9rem; color:var(--muted); margin-bottom:0.5rem;">
+              This form can be connected to an email service later. For now, you can replace it with a simple
+              mailto link or use it as a design template.
+            </p>
+            <form>
+              <div>
+                <label for="name">Name</label>
+                <input id="name" type="text" placeholder="Your name" />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="you@example.com" />
+              </div>
+              <div>
+                <label for="role">I am a...</label>
+                <select id="role">
+                  <option>Student</option>
+                  <option>Teacher / School Staff</option>
+                  <option>Healthcare Professional</option>
+                  <option>Parent / Caregiver</option>
+                  <option>Community Member</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="message">Message</label>
+                <textarea id="message" placeholder="Tell us how you'd like to get involved."></textarea>
+              </div>
+              <button type="button" class="btn btn-primary">
+                Submit (demo)
+              </button>
+              <p class="hint">
+                Tip: When you put this online, you can connect the form to services like Formspree, Google Forms, or Netlify Forms.
+              </p>
+            </form>
+          </div>
+
+          <div class="card">
+            <h3>Quick details</h3>
+            <p style="font-size:0.9rem; color:var(--muted);">
+              Cycle for Change is currently based at Sidwell Friends School (Class of 2027 leadership)
+              in Washington, DC.
+            </p>
+            <ul class="impact-list" style="margin-top:0.8rem;">
+              <li><strong>Email:</strong> your-email-here@example.com (replace with your real one)</li>
+              <li><strong>Primary partner:</strong> Children’s National Hospital – Emergency Department</li>
+              <li><strong>Focus areas:</strong> menstrual equity, adolescent health, community education</li>
+            </ul>
+            <p class="hint" style="margin-top:0.8rem;">
+              You can also add socials here later (Instagram, TikTok, etc.) once you create accounts for Cycle for Change.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <span>© <span id="year"></span> Cycle for Change. All rights reserved.</span>
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#impact">Impact</a>
+          <a href="#get-involved">Get Involved</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year automatically
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
